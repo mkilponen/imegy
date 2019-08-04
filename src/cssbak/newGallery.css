@@ -1,0 +1,287 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto');
+
+
+
+.center{
+  text-align: center
+}
+
+.showbox {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 5%;
+}
+.loadingContainer{
+  top:5%;
+  position: relative;
+  left:15%;
+  right: 15%;
+  width: 60%;
+}
+.circle{
+  width: 40%;
+  right: 30%;
+  left: 30%;
+  position: relative
+}
+.line{
+  width: 40%;
+  right: 30%;
+  left: 30%;
+  position: relative
+}
+
+.newPostContainer{
+  top: 5%;
+  position: relative;
+}
+
+.galleryName{
+  margin-bottom: 10px;
+  left: 0px;
+  position: relative;
+}
+
+.custom-file-upload-newPost {
+    border: 1px solid black;
+    display: inline-block;
+    padding: 3px 8px;
+    cursor: pointer;
+    border-radius: 10px;
+    left: 43%;
+    right: 43%;
+    position: relative;
+    -webkit-box-shadow: 1px 1px 11px 2px rgba(115,115,115,1);
+    -moz-box-shadow: 1px 1px 11px 2px rgba(115,115,115,1);
+    box-shadow: 1px 1px 11px 2px rgba(115,115,115,1);
+}
+
+.button{
+margin-left: 10px;
+}
+span{
+  font-family: 'Roboto', sans-serif;
+  font-weight: 300;
+}
+input[type="file"] {
+    display: none;
+}
+h3{
+  font-family: 'Roboto', sans-serif;
+}
+h1{
+  color: #333333;
+}
+
+
+/* PREVIEW */
+
+.previewContainer{
+  display: inline-block;
+  position: relative;
+  margin-right: 20px;
+}
+
+.selectIndex{
+  margin-top: 3px;
+  margin-bottom: 3px;
+  margin-left: 3px;
+  float:left;
+  display: inline-block;
+  width: 60px;
+  height: 25px;
+}
+
+.deleteIconDiv{
+  margin-top: 3px;
+  float:right;
+  display: inline-block;
+}
+.deleteIcon{
+  color: #2F2D3A;
+  margin: 0px 3px 2px 4px;
+}
+
+.selectDisplay{
+  margin-top: 3px;
+  margin-bottom: 3px;
+  float:right;
+  display: inline-block;
+  visibility: hidden;
+  height: 25px;
+}
+.fileName{
+  color:gray;
+  font-size: 12px;
+  margin-bottom: 3px;
+  display: inline-block;
+  text-align: left;
+  position: relative;
+  font-family: 'Roboto', sans-serif;
+}
+
+
+.image{
+  display: block;
+  position: relative;
+  height: 160px;
+  width: 160px;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+/* Extra small devices (phones, 600px and down) */
+@media only screen and (min-width: 200px) {
+
+  .titleContainer{
+    width:100%;
+    position: relative;
+    border-style: none;
+    margin-bottom: 0px;
+  }
+  .optionsContainer{
+    width:100%;
+    float:none;
+    position: relative;
+    margin-bottom: 50px;
+    padding-left: 0px
+  }
+  .previewsContainer{
+    margin-bottom: 25px;
+  }
+
+  .previewContainer{
+    display: block;
+    width:50%;
+    right:25%;
+    left:25%;
+    margin-bottom: 60px;
+    margin-right: 15px;
+  }
+
+  .galleryName{
+    width: 80%;
+    left: 10%;
+    right: 10%;
+  }
+
+  .galleryControls{
+    width: 90%;
+    margin-left: 10%;
+    display: inline-block;
+  }
+
+  .faAwesome{
+    color: black;
+    display: inline;
+    margin-top: 0px;
+    position: relative;
+    margin-left: 3px;
+  }
+
+  .button{
+    display: inline-block;
+    width: 40%;
+    margin-left: 0px;
+    position: relative;
+  }
+
+  #uploadbutton{
+    left:10%;
+  }
+  #submitbutton{
+    left:10%;
+  }
+
+  .image{
+    display: block;
+    position: relative;
+    width: 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
+}
+
+/* Small devices (portrait tablets and large phones, 600px and up) */
+@media only screen and (min-width: 800px) {
+
+  .newPostContainer{
+    width: 50%;
+    right:25%;
+    left:25%;
+  }
+  .titleContainer{
+    width:49%;
+    float:left;
+    height: inherit;
+    position: relative;
+    border-right: 1px solid #333333;
+    border-left: 0px;
+    border-top: 0px;
+    border-bottom: 0px;
+    border-style: solid;
+    margin-bottom: 50px;
+  }
+  .optionsContainer{
+    width:49%;
+    float:right;
+    position: relative;
+    margin-bottom: 50px;
+    height: inherit;
+  }
+  .previewsContainer{
+    width: 100%;
+    position: relative;
+    display: block;
+    float:left;
+  }
+  .previewContainer{
+    display: inline-block;
+    position: relative;
+    width: 20%;
+    left: 0px;
+    margin-bottom: 25px;
+    margin-right: 5%;
+  }
+  .imageContainer{
+    width: 100%;
+    height: 85%;
+    position: relative;
+  }
+  .image{
+    display: block;
+    position: relative;
+    width: 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
+  .deleteButton{
+    max-height: 30px !important;
+    float: right;
+  }
+  .circle{
+    width: 20%;
+    right: 40%;
+    left: 40%;
+    margin-top: 15%;
+
+    display: block;
+    position: relative
+  }
+  .line{
+    margin-top: 20px;
+    width: 20%;
+    right: 40%;
+    left: 40%;
+    display: block;
+    position: relative
+  }
+
+
+
+}

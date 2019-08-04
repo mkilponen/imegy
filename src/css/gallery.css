@@ -1,0 +1,60 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto');
+
+
+
+
+
+@media only screen and (min-width: 200px) {
+  h1 h2{
+    font-family: 'Roboto', sans-serif;
+    font-weight: lighter;
+  }
+  .title{
+    margin-bottom: 0px;
+    text-align: center
+  }
+
+  .downloadButton{
+    margin-bottom: 30px !important;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+  .galleryImage{
+    max-height: 90vh;
+    max-width: 90vw;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 40px;
+    height: auto;
+    left: 5%;
+    right:5%;
+    width:90%;
+  }
+}
+@media only screen and (min-width: 800px) {
+  h1 h2{
+    font-family: 'Roboto', sans-serif;
+    font-weight: lighter;
+  }
+  .title{
+    margin-bottom: 0px;
+    text-align: center
+  }
+
+  .downloadButton{
+    margin-bottom: 30px !important;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+  .galleryImage{
+    max-height: 90vh;
+    max-width: 90vw;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 40px;
+    height: auto,
+  }
+
+}

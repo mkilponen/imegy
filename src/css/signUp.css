@@ -1,0 +1,74 @@
+
+
+
+@media only screen and (min-width: 200px) {
+  .signUpContainer{
+    width:70%;
+    left:15%;
+    right:15%;
+    top:20px;
+  }
+  .formInput{
+    width:100%;
+    left: 10%;
+  }
+  .hamburger{
+    float:right
+  }
+}
+
+@media only screen and (min-width: 800px) {
+  .signUpContainer{
+    width:20%;
+    left:40%;
+    right:40%;
+    top:5%;
+    position: relative;
+  }
+
+  .formInput{
+    width:100%;
+    position: relative;
+    display: block;
+    left: 0;
+    position: relative
+  }
+}
+/*
+
+@media only screen and (max-width: 600px) {
+  .custom-file-upload{
+    left: 30%;
+    right: 30%;
+    width:auto;
+  }
+  .welcomePage{
+    height:auto;
+    width: 100%;
+    position: fixed;
+  }
+}
+
+@media only screen and (max-width: 1100px) {
+
+  .custom-file-upload{
+    left: 42%;
+    right: 47%;
+    width:auto;
+  }
+
+}
+
+@media only screen and (max-width: 1200px) {
+
+.custom-file-upload{
+  left: 40%;
+  right: 44%;
+  width:auto;
+}
+
+}
+*/
+@media only screen and (min-width: 850px) {
+
+}

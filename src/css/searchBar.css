@@ -1,0 +1,55 @@
+
+.downshift{
+  z-index: 1;
+    display: inline-block;
+}
+
+.MuiInput-underline:after {
+  border-bottom-color: white !important
+}
+
+/* Medium devices (landscape tablets, 768px and up) */
+@media only screen and (min-width: 200px) {
+  .downshift{
+    left: 0%;
+    margin-left: 25px;
+    display: inline-block;
+    z-index: 1;
+    position: relative;
+    top:5px;
+  }
+  .paper{
+    position: absolute;
+    z-index: 2;
+    max-height:450px;
+    overflow-y:scroll;
+    width: 100%
+  }
+  ::-webkit-scrollbar {
+      display: none;
+  }
+}
+@media only screen and (min-width: 800px) {
+  .downshift{
+    margin-left: 25px;
+    margin-top: 0px !important;
+    z-index: 1;
+    display: inline-block;
+    position: relative;
+  }
+  ::-webkit-scrollbar {
+      display: none;
+  }
+  .MuiFormControl-root{
+    display: inline-block;
+    width: 100%;
+    margin-right: 15px;
+  }
+  .paper{
+    position: absolute;
+    z-index: 2;
+    max-height:450px;
+    overflow-y: scroll;
+    width: 100%
+  }
+}

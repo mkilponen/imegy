@@ -1,0 +1,27 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto');
+
+
+
+h1 h2{
+  font-family: 'Roboto', sans-serif;
+  font-weight: lighter;
+}
+.title{
+  margin-bottom: 0px;
+  text-align: center
+}
+
+.downloadButton{
+  margin-bottom: 30px !important;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+.galleryImage{
+  max-height: 90vh;
+  max-width: 90vw;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 20px;
+  height: auto,
+}
