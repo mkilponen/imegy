@@ -9,36 +9,24 @@ import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 
-import firebase from 'firebase';
 import { makeStyles } from '@material-ui/core/styles';
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faBars } from '@fortawesome/free-solid-svg-icons';
 import '../css/navigation.css';
-import {connect} from 'react-redux'
-import {setPage} from '../actions'
 library.add(faBars)
 
-const NavigationMobile = (props) => {
 
-  function signOut(){
-    firebase.auth().signOut().then(function() {
-      //rerender non signed in view and default homepage
-      props.setPage('home')
-    }, function(error) {
-      console.log(error);
-    });
-  }
+const useStyles = makeStyles({
+  list: {
+    width: 250
+  },
+  fullList: {
+    width: 'auto',
+  },
+});
 
-  const useStyles = makeStyles({
-    list: {
-      width: 250
-    },
-    fullList: {
-      width: 'auto',
-    },
-  });
-
+export default function TemporaryDrawer(props) {
   const classes = useStyles();
   const [state, setState] = React.useState({
     top: false,
@@ -70,14 +58,14 @@ const NavigationMobile = (props) => {
         {props.loggedIn ?
           <div>
             {loggedIn.map((item, index) => (
-            <ListItem button key={item.text} onClick={() => props.setPage(item.page)}>
+            <ListItem button key={item.text} onClick={() => props.appState({page: item.page})}>
               <ListItemIcon></ListItemIcon>
               <ListItemText primary={item.text} />
             </ListItem>
             ))}
             <Divider />
             <List>
-                <ListItem button  onClick={() => signOut()}>
+                <ListItem button  onClick={() => props.signOut()}>
                   <ListItemIcon></ListItemIcon>
                   <ListItemText primary={'sign out'} />
                 </ListItem>
@@ -88,7 +76,7 @@ const NavigationMobile = (props) => {
 
           <div>
             {loggedOut.map((item, index) => (
-            <ListItem button key={item.text} onClick={() => props.setPage(item.page)}>
+            <ListItem button key={item.text} onClick={() => props.appState({page: item.page})}>
               <ListItemIcon></ListItemIcon>
               <ListItemText primary={item.text} />
             </ListItem>
@@ -97,11 +85,11 @@ const NavigationMobile = (props) => {
           <List>
               <ListItem button  >
                 <ListItemIcon></ListItemIcon>
-                <ListItemText primary={'sign in'} onClick={() => props.setPage('signIn')}/>
+                <ListItemText primary={'sign in'} onClick={() => props.appState({page: 'signIn'})}/>
               </ListItem>
               <ListItem button >
                 <ListItemIcon></ListItemIcon>
-                <ListItemText primary={'sign up'} onClick={() => props.setPage('signUp')}/>
+                <ListItemText primary={'sign up'} onClick={() => props.appState({page: 'signUp'})}/>
               </ListItem>
           </List>
           </div>}
@@ -120,13 +108,3 @@ const NavigationMobile = (props) => {
     </div>
   );
 }
-
-const mapStateToProps = (state) => {
-  return {
-    mobileDevice: state.mobileDevice,
-    loggedIn: state.loggedIn,
-    setPage: setPage
-  }
-}
-
-export default connect(mapStateToProps, {setPage})(NavigationMobile)

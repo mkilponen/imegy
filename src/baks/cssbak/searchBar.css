@@ -8,31 +8,21 @@
   border-bottom-color: white !important
 }
 
-.owner{
-  color: #969696;
-  display: block;
-  font-size: 12;
-  margin-bottom: 0;
-  margin-top: 0
-}
-
 /* Medium devices (landscape tablets, 768px and up) */
 @media only screen and (min-width: 200px) {
   .downshift{
     left: 0%;
     margin-left: 25px;
     display: inline-block;
-    z-index: 5;
+    z-index: 1;
     position: relative;
     top:5px;
   }
   .paper{
     position: absolute;
-    z-index: 5 !important;
+    z-index: 2;
     width: 100%;
     overflow-y: hidden;
-    z-index: 120 !important;
-    max-height: 350
   }
   ::-webkit-scrollbar {
       display: none;
@@ -42,7 +32,7 @@
   .downshift{
     margin-left: 25px;
     margin-top: 0px !important;
-    z-index: 10 !important;
+    z-index: 1;
     display: inline-block;
     position: relative;
   }
@@ -56,7 +46,7 @@
   }
   .paper{
     position: absolute;
-    z-index: 5;
+    z-index: 2;
     overflow-y: hidden;
   /*  max-height:450px; */
     width: 100%

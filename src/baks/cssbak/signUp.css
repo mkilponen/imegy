@@ -19,9 +19,9 @@
 
 @media only screen and (min-width: 800px) {
   .signUpContainer{
-    width:30%;
-    left:35%;
-    right:35%;
+    width:20%;
+    left:40%;
+    right:40%;
     top:5%;
     position: relative;
   }

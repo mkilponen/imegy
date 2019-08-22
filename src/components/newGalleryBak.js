@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 //components
 import Input from '@material-ui/core/Input';
@@ -6,6 +6,7 @@ import Button from '@material-ui/core/Button';
 import { Line } from 'rc-progress';
 import Preview from './preview'
 import Fade from 'react-reveal/Fade';
+import { DragDropContext } from 'react-beautiful-dnd';
 
 //redux
 import {connect} from 'react-redux';
@@ -67,7 +68,7 @@ const NewGallery = (props) => {
         })
 
               // upload iamges async
-              const loop = async () => {
+              let loop = async () => {
                   for (let image of props.gallery) {
                       var file = image.file;
                       var fileName = image.fileName;
@@ -134,6 +135,7 @@ const NewGallery = (props) => {
     }
 
     let helperText = checkBox ? '' : ''
+    let url = 'url(' + props.url + ')'
 
     {/* upload animaton  */ }
     if(loading){
@@ -190,8 +192,11 @@ const NewGallery = (props) => {
                type="file"
                onChange={(e) => uploadImages(e)}
               />
+
           </div>
+
       </div>
+
       )
     }
 
@@ -225,7 +230,7 @@ const NewGallery = (props) => {
                              type="file"
                              onChange={(e) => uploadImages(e)}
                            />
-                           <p className="helperText">Delete after first view<span><input defaultChecked={checkBox} onChange={(e) => setCheckBox(e.target.checked)} type="checkbox"/></span></p>
+                           <p style={{float: 'left', width: '100%', marginTop: 0, marginBottom: 10}}>Delete after first view<span><input defaultChecked={checkBox} onChange={(e) => setCheckBox(e.target.checked)} type="checkbox"/></span></p>
                            <label htmlFor="contained-button">
                              <Button style={{marginRight: 5, marginBottom: 5}} variant="outlined" component="span" >
                                {props.gallery.length === 0 ? 'upload' : 'reupload'}

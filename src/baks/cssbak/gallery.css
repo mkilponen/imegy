@@ -15,7 +15,6 @@
   }
 
   .downloadButton{
-    margin-top: 20px !important;
     margin-bottom: 30px !important;
     left: 50%;
     transform: translate(-50%, -50%);
@@ -44,7 +43,6 @@
   }
 
   .downloadButton{
-    margin-top: 20px !important;
     margin-bottom: 30px !important;
     left: 50%;
     transform: translate(-50%, -50%);

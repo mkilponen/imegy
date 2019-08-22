@@ -1,34 +1,23 @@
-import React, { Component } from 'react';
+import React, { useState, useEffect } from 'react';
 import firebase from 'firebase';
-import { css } from '@emotion/core';
-import Input from '@material-ui/core/Input';
 import Button from '@material-ui/core/Button';
-import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
-import FormControl from '@material-ui/core/FormControl';
-import FormHelperText from '@material-ui/core/FormHelperText';
-import PulseLoader from 'react-spinners/PulseLoader';
+import Fade from 'react-reveal/Fade';
 import '../css/user.css';
+import '../css/index.css';
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTrash } from '@fortawesome/free-solid-svg-icons';
 library.add(faTrash)
 
 
-class User extends Component {
+export default function user(props){
 
-  constructor(props) {
-    super(props);
-    this.handleClick = this.handleClick.bind(this);
-    this.deleteGallery = this.deleteGallery.bind(this)
-    this.state = {userGalleries: []}
-  }
+  const [userGalleries, setUserGalleries] = useState([])
 
-  componentWillMount(){
-    let uid = this.props.user.uid
-    let _this = this
-
-    firebase.database().ref('/posts/').once('value').then((snapshot) => {
+  useEffect(() => {
+    let uid = props.user.uid
+    firebase.database().ref('/galleries/').once('value').then((snapshot) => {
 
         let userGalleries = []
         snapshot.forEach((item) =>{
@@ -40,21 +29,17 @@ class User extends Component {
             userGalleries.push(obj)
           }
         })
-        this.setState({userGalleries})
+        console.log(userGalleries);
+        setUserGalleries(userGalleries)
     });
-  }
+  }, [])
 
-  handleClick(item){
-    console.log(item);
-  }
+  function deleteGallery(e, key){
+    firebase.database().ref('/galleries/' + key).remove().then(() => {
 
-  deleteGallery(key){
-    firebase.database().ref('/posts/' + key).remove().then(() => {
+      let uid = props.user.uid
 
-      let uid = this.props.user.uid
-      let _this = this
-
-      firebase.database().ref('/posts/').once('value').then((snapshot) => {
+      firebase.database().ref('/galleries/').once('value').then((snapshot) => {
 
           let userGalleries = []
           snapshot.forEach((item) =>{
@@ -66,34 +51,30 @@ class User extends Component {
               userGalleries.push(obj)
             }
           })
-          this.setState({userGalleries})
+          setUserGalleries(userGalleries)
       });
 
     })
   }
 
-  render(){
-    console.log(this.state.userGalleries);
-        return (
-          <div className="contentContainer userContainer">
-          <h1> My galleries </h1>
-
-              {this.state.userGalleries.map((item, key) => {
-                return(
+  return (
+      <div className="contentContainer userContainer">
+      <Fade duration={450}>
+      <h1 className="center"> My galleries </h1>
+      <p className="center">{userGalleries.length === 0 ? 'You have not uploaded any galleries' : ''}</p>
+          {userGalleries.map((item, key) => {
+              return(
                   <div key={item.key}>
-                    <div className="galleryNameContainer">
-                      <MenuItem className="menuitem" onClick={() => this.handleClick(item)}>{item.val.galleryName}</MenuItem>
-                    </div>
-                      <Button onClick={() => this.deleteGallery(item.key)} className='deleteButton' variant='default' color='primary'>
+                      <div className="galleryNameContainer">
+                        <MenuItem className="menuitem">{item.val.galleryName}</MenuItem>
+                      </div>
+                      <Button onClick={(e) => deleteGallery(e, item.key)} className='deleteGallery' variant='default' color='primary'>
                         <FontAwesomeIcon  className='deleteIcon' icon='trash'  />
                       </Button>
                   </div>
-                )
-              })}
-
-          </div>
-        )
-      }
+              )
+          })}
+      </Fade>
+      </div>
+  )
 }
-
-export default User;

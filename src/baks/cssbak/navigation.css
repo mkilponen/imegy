@@ -1,0 +1,146 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto');
+
+.helperError{
+  bottom: 5px;
+  position: relative;
+  color: red !important;
+}
+.helperNewAccount{
+  bottom: 5px;
+  position: relative;
+  color: white !important;
+  cursor: pointer;
+}
+span{
+  font-family: 'Roboto', sans-serif;
+}
+
+.signInButton{
+  margin:10px;
+  width:100px;
+  top: 27px;
+  position: relative;
+  right: 0px;
+}
+.signInFormDesktop{
+  display: inline-block;
+}
+.navigation{
+  text-shadow: 2px 2px 5px black;
+  display: inline !important;
+  font-size: 23px;
+  margin-right: 35px;
+  position: relative;
+  cursor: pointer;
+}
+
+/*
+.MuiFormControl-marginNormal-2{
+  margin-top: 0 !important;
+  margin-bottom: 0 !important
+}
+*/
+
+/* Medium devices (landscape tablets, 768px and up) */
+@media only screen and (min-width: 200px) {
+  .signInField{
+    display: block;
+    width: 100%;
+  }
+  .navigationDesktop{
+    display: none
+  }
+  .signInFormMobile{
+    top: 5%;
+    width: 40%;
+    right: 30%;
+    left: 30%;
+    margin-right: 0px;
+    position: relative;
+  }
+  .signInButton{
+    width:auto;
+    color: white;
+    display: block
+  }
+  .hamburger{
+    display: inline;
+    position: relative;
+    margin-top: 20px;
+    margin-right: 10px;
+  }
+  .MuiFormControl-root{
+    display: block
+  }
+}
+
+@media only screen and (min-width: 800px){
+
+  .hamburger{
+    display: none
+  }
+  .navigationDesktop{
+    display: inline-block;
+    float: right;
+    z-index: 1;
+    top: 25px;
+    position: relative;
+  }
+  .signInFormDesktop{
+    display: inline-block;
+    float: right;
+    z-index: 1;
+    margin-right: 15px;
+    position: relative;
+  }
+
+
+
+  .signInField{
+    display: inline-block;
+    width:130px !important;
+    margin-left: 10px !important;
+    margin-right: 10px !important;
+  }
+
+  .MuiFormControl-root{
+    display: inline-block;
+    margin-right: 15px;
+  }
+
+}
+/*
+
+@media only screen and (max-width: 600px) {
+  .custom-file-upload{
+    left: 30%;
+    right: 30%;
+    width:auto;
+  }
+  .welcomePage{
+    height:auto;
+    width: 100%;
+    position: fixed;
+  }
+}
+
+@media only screen and (max-width: 1100px) {
+
+  .custom-file-upload{
+    left: 42%;
+    right: 47%;
+    width:auto;
+  }
+
+}
+
+@media only screen and (max-width: 1200px) {
+
+.custom-file-upload{
+  left: 40%;
+  right: 44%;
+  width:auto;
+}
+
+}
+*/

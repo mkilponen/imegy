@@ -1,109 +1,89 @@
 
-import React, { Component } from 'react';
+import React, { useState } from 'react';
 import firebase from 'firebase';
-import { css } from '@emotion/core';
 import Input from '@material-ui/core/Input';
 import Button from '@material-ui/core/Button';
 import InputLabel from '@material-ui/core/InputLabel';
 import FormControl from '@material-ui/core/FormControl';
 import FormHelperText from '@material-ui/core/FormHelperText';
-import PulseLoader from 'react-spinners/PulseLoader';
+import Fade from 'react-reveal/Fade';
 import '../css/signUp.css';
+import {connect} from 'react-redux';
+import {setPage} from '../actions'
 
 
-class SignUp extends Component {
+const Signup = (props) => {
 
-  constructor(props) {
-    super(props);
-    this.evHandler = this.evHandler.bind(this)
-    this.submit = this.submit.bind(this)
-    this.state = {
-                 username: '',
-                 usernameHelper: '',
-                 password: '',
-                 passwordHelper: '',
-                 passwordRepeat: '',
-                 passwordRepeatHelper: ''
-                 }
-  }
+  const [username, setUsername]                         = useState('');
+  const [email, setEmail]                               = useState('');
+  const [password,setPassword]                          = useState('');
+  const [passwordRepeat,setPasswordRepeat]              = useState('');
+  const [error, setError]                               = useState('');
+  const [loading, setLoading]                           = useState(false);
+  const [usernameHelper, setUsernameHelper]             = useState('')
+  const [passwordHelper, setPasswordHelper]             = useState('')
+  const [passwordRepeatHelper, setPasswordRepeatHelper] = useState('')
 
-  evHandler(e){
-    let value = e.target.value;
-    let field = e.target.name;
-    let _this = this;
+  function evHandler(e){
+        let value = e.target.value;
+        let field = e.target.name;
 
-    switch (field) {
-      case 'email':
-        this.setState({email: value})
-        break;
-      case 'username':
+        switch (field) {
+          case 'email':
+                setEmail(value)
+                break;
 
-        //check if username is too short
-        if(this.state.username.length < 3 || this.state.username.length > 1){
-          this.setState({usernameHelper: 'Username is too short', username: e.value})
-        }
+          case 'username':
+                if(username.length < 3 || username.length > 1){
+                  setUsernameHelper('Username is too short')
+                }
+                // check if username is taken
+                else{
+                  firebase.database().ref('/users/').once('value').then((snapshot) => {
+                          const users = Object.values(snapshot.val());
+                          const user = users.filter(user => user.username ===  username);
+                          console.log(user);
+                  });
+                }
+                setUsername(value)
+                props.setNewUserUsername(value)
+                setUsernameHelper('')
+                break;
 
-        // check if username is taken
-        else{
-          firebase.database().ref('/users/').once('value').then((snapshot) => {
+          case 'password':
+                setPassword(value)
+                value.length < 5 ? setPasswordHelper('Password is too short') : setPasswordHelper('')
+                break;
 
-                  snapshot.forEach((child) => {
-                    let username = child.val().username
-                    if(username === value){
-                      _this.setState({usernameHelper: 'Username taken', username: e.value})
-                      return
-                    }
-                    else{
-                      _this.setState({usernameHelper: '', username: e.value})
-                      return
-                    }
-                  })
-          });
-        }
-
-        this.setState({username: value, usernameHelper: ''})
-
-        break;
-      case 'password':
-
-          this.setState({password: value})
-          value.length < 5 ? this.setState({passwordHelper: 'Password is too short'}) : this.setState({passwordHelper: ''})
+          case 'passwordRepeat':
+                setPasswordRepeat(value)
+                value !== password ? setPasswordRepeatHelper("Passwords don't match!") : setPasswordRepeatHelper("")
+                break;
+          default:
           break;
+        }
+      }
 
-      case 'passwordRepeat':
-          this.setState({passwordRepeat: value})
-          value != this.state.password ? this.setState({passwordRepeatHelper: "Passwords don't match!"}) : this.setState({passwordRepeatHelper: ''})
-          break;
-    }
-  }
-
-  submit(){
-
-        //create random email for firebase
-        let random = Math.floor(Math.random() * Math.floor(10000));
-        let email = random.toString() + '@imegy.com'
-        let password = this.state.password;
-        const _this = this
+      const submit = () => {
+          //create random email for firebase
+          //maybe later implement real email and confirmation
+          let random = Math.floor(Math.random() * Math.floor(10000));
+          let email = random.toString() + '@imegy.com'
 
           firebase.auth().createUserWithEmailAndPassword(email, password).catch(function(error, user) {
+                if(error){
+                  var errorCode = error.code;
+                  console.log(errorCode, error);
+                }
+          })
+          props.setPage('home')
+      }
 
-          if(error){
-            var errorCode = error.code;
-            var errorMessage = error.message;
-            console.log(errorCode, error);
-          }
-          else{
-            _this.props.appState({username: this.state.username, page: 'home'})
-          }
+      let header = props.mobileDevice ? <h2>Create a new account</h2> : <h2>Create a new account</h2>
 
-          });
-          _this.props.appState({page: 'home'})
-  }
-
-render(){
-  let header = this.props.mobileDevice ? <h2>Create a new account</h2> : <h2>Create a new account</h2>
       return (
         <div className='signUpContainer'>
+        <Fade cascade duration={450}>
         {header}
 
         {/*<FormControl className="formInput" style={{display: 'block'}}>
@@ -114,29 +94,35 @@ render(){
 
         <FormControl className="formInput" style={{display: 'block', left: 0, position: 'relative'}}>
           <InputLabel htmlFor='my-input'>Username</InputLabel>
-          <Input name='username' onChange={this.evHandler} id='my-input' aria-describedby='my-helper-text' />
-          <FormHelperText id='my-helper-text'>{this.state.usernameHelper}</FormHelperText>
+          <Input name='username' onChange={e => evHandler(e)} id='my-input' aria-describedby='my-helper-text' />
+          <FormHelperText id='my-helper-text'>{usernameHelper}</FormHelperText>
         </FormControl>
 
         <FormControl className="formInput" style={{display: 'block', left: 0, position: 'relative'}}>
           <InputLabel htmlFor='my-input'>Password</InputLabel>
-          <Input name='password' onChange={this.evHandler} id='my-input' aria-describedby='my-helper-text' />
-          <FormHelperText id='my-helper-text'>{this.state.passwordHelper}</FormHelperText>
+          <Input type='password' name='password' onChange={e => evHandler(e)} id='my-input' aria-describedby='my-helper-text' />
+          <FormHelperText id='my-helper-text'>{passwordHelper}</FormHelperText>
         </FormControl>
 
         <FormControl className="formInput" style={{display: 'block', left: 0, position: 'relative'}}>
           <InputLabel htmlFor='my-input'>Repeat password</InputLabel>
-          <Input name='passwordRepeat' onChange={this.evHandler} id='my-input' aria-describedby='my-helper-text' />
-          <FormHelperText id='my-helper-text'>{this.state.passwordRepeatHelper}</FormHelperText>
+          <Input type='password' name='passwordRepeat' onChange={(e) => evHandler(e)} id='my-input' aria-describedby='my-helper-text' />
+          <FormHelperText id='my-helper-text'>{passwordRepeatHelper}</FormHelperText>
         </FormControl>
 
-        <Button style={{display: 'block'}} onClick={this.submit} name='submit' variant='outlined' className='signInButton'>
+        <Button style={{display: 'block'}} onClick={(e) => submit(e)} name='submit' variant='outlined' className='signInButton'>
           Sign up
         </Button>
+        </Fade>
 
         </div>
       )
-    }
 }
 
-export default SignUp;
+const mapStateToProps = (state) => {
+  return {
+    mobileDevice: state.mobileDevice
+  }
+}
+
+export default connect(mapStateToProps, {setPage})(Signup)
